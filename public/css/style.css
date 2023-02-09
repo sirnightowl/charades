@@ -150,6 +150,16 @@ button#info {
   padding-top: 10px;
 }
 
+a.social-link {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+a.social-link svg {
+  width: 24px;
+}
+
 @media (max-width: 576px) {
   #actions button span {
     display: none;

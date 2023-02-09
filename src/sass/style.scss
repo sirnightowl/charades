@@ -110,6 +110,14 @@ border-radius: 20px;
 	
 }
 
+a.social-link {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    svg {width: 24px;}
+}
+
 
 @media (max-width: 576px) { 
 
