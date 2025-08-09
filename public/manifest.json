@@ -1,0 +1,20 @@
+{
+  "name": "Charades",
+  "short_name": "Charades",
+  "start_url": "/charades/public/index.html",
+  "display": "standalone",
+  "background_color": "#3F4346",
+  "theme_color": "#3F4346",
+  "icons": [
+    {
+      "src": "/charades/public/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/charades/public/android-chrome-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }
+  ]
+}
