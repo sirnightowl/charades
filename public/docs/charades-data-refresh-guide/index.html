@@ -1,0 +1,97 @@
+<h1>Charades Data Refresh System - Setup Guide</h1>
+<h2>Overview</h2>
+<p>This guide explains how to set up and use the automated data refresh system for your charades game. The system can fetch fresh data for all categories (movies, TV shows, video games, songs, and books) from various free APIs.</p>
+<h2>Current Implementation</h2>
+<p>The system currently uses:</p>
+<ul>
+<li><strong>OMDb API</strong> for movies and TV shows (free tier, 1000 requests/day)</li>
+<li><strong>RAWG API</strong> for video games (free tier available)</li>
+<li><strong>Google Books API</strong> for books (no API key required)</li>
+<li><strong>Sample data</strong> for songs</li>
+</ul>
+<h2>Setup Instructions</h2>
+<h3>1. Get API Keys</h3>
+<h4>OMDb API (Movies/TV Shows)</h4>
+<ol>
+<li>Visit: http://www.omdbapi.com/apikey.aspx</li>
+<li>Enter your email address</li>
+<li>Check your email for the API key</li>
+</ol>
+<h4>RAWG API (Video Games)</h4>
+<ol>
+<li>Visit: https://rawg.io/apidocs</li>
+<li>Sign up for a free account</li>
+<li>Get your API key from the dashboard</li>
+</ol>
+<h3>2. Configure Environment Variables</h3>
+<p>Add your API keys to the <code>.env</code> file in your project root:</p>
+<pre><code>OMDB_API_KEY=your_omdb_api_key_here
+RAWG_API_KEY=your_rawg_api_key_here
+</code></pre>
+<h3>3. Run the Refresh Script</h3>
+<pre><code class="language-bash">npm run refresh-data
+</code></pre>
+<h2>API Alternatives</h2>
+<p>If you need to change APIs in the future, here are some alternatives:</p>
+<h3>Movies/TV Shows:</h3>
+<ul>
+<li><strong>TMDB</strong>: More comprehensive but has commercial use restrictions</li>
+<li><strong>IMDb Lists</strong>: Continue using IMDb list IDs (original approach)</li>
+<li><strong>TVmaze</strong>: Good for TV shows specifically</li>
+</ul>
+<h3>Video Games:</h3>
+<ul>
+<li><strong>IGDB</strong>: Alternative to RAWG (requires Twitch account)</li>
+</ul>
+<h3>Books:</h3>
+<ul>
+<li><strong>Open Library</strong>: Alternative to Google Books</li>
+<li><strong>Goodreads API</strong>: Being deprecated but still functional</li>
+</ul>
+<h3>Songs:</h3>
+<ul>
+<li><strong>MusicBrainz</strong>: Free but complex</li>
+<li><strong>Last.fm</strong>: Good for music metadata</li>
+<li><strong>Spotify</strong>: Requires OAuth (more complex setup)</li>
+</ul>
+<h2>File Structure</h2>
+<pre><code>src/
+  data/
+    refresh-data.js    # Main refresh script
+    charades.json      # Output data file
+  docs/
+    charades-data-refresh-guide.md  # This guide
+.env                   # API keys (not committed to git)
+</code></pre>
+<h2>Troubleshooting</h2>
+<h3>&quot;API Key Not Found&quot; Messages</h3>
+<p>Ensure your <code>.env</code> file is properly formatted and located in the project root.</p>
+<h3>&quot;Rate Limit Exceeded&quot;</h3>
+<ul>
+<li>OMDb free tier is 1000 requests/day</li>
+<li>RAWG free tier is 20k requests/month</li>
+<li>Wait 24 hours or upgrade to paid tiers if needed</li>
+</ul>
+<h3>&quot;Error Fetching Data&quot;</h3>
+<ol>
+<li>Check your internet connection</li>
+<li>Verify API keys are correct</li>
+<li>Check that APIs are not down</li>
+<li>Look at error messages for specific details</li>
+</ol>
+<h2>Customization</h2>
+<p>To modify what data is fetched:</p>
+<ol>
+<li>Edit the query parameters in each fetch function</li>
+<li>Adjust the number of items fetched (page_size parameter)</li>
+<li>Modify the sample data functions for fallback content</li>
+</ol>
+<h2>Sample Data</h2>
+<p>When API keys are not provided or APIs fail, the system falls back to sample data. This ensures your charades game always has content, even without internet access.</p>
+<h2>Security Notes</h2>
+<ul>
+<li>Never commit your <code>.env</code> file to version control</li>
+<li>The <code>.gitignore</code> file already excludes <code>.env</code> files</li>
+<li>API keys should be treated as sensitive information</li>
+</ul>
+<pre><code></code></pre>

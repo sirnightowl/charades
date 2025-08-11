@@ -1,0 +1,65 @@
+<h1>Charades Data Management</h1>
+<p>This directory contains scripts and data files for managing your charades game content.</p>
+<h2>Automatic Data Refresh</h2>
+<p>To automatically refresh your charades lists with new movies, TV shows, games, songs, and books:</p>
+<ol>
+<li>
+<p>Run the refresh script:</p>
+<pre><code>npm run refresh-data
+</code></pre>
+</li>
+<li>
+<p>This will update the JSON files in this directory with the latest data.</p>
+</li>
+</ol>
+<h2>Implementation Guide</h2>
+<h3>Setting up API Keys</h3>
+<p>To fetch real-time data from official sources:</p>
+<ol>
+<li>
+<p>Register for free API keys:</p>
+<ul>
+<li>TMDB (Movies/TV): https://www.themoviedb.org/settings/api</li>
+<li>RAWG (Games): https://rawg.io/apidocs</li>
+<li>iTunes (Music): No API key required</li>
+</ul>
+</li>
+<li>
+<p>Add your API keys to environment variables or directly in the refresh script.</p>
+</li>
+</ol>
+<h3>Using the Data in Your Game</h3>
+<p>Update your script.js to load data from JSON files instead of hardcoded arrays:</p>
+<pre><code class="language-javascript">// Instead of hardcoded arrays, load from JSON:
+fetch('/src/data/movies.json')
+  .then(response =&gt; response.json())
+  .then(movies =&gt; {
+    // Use the movies data in your game
+  });
+</code></pre>
+<h2>Data Structure</h2>
+<p>Each JSON file contains an array of items with this structure:</p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;Item Name&quot;,
+    &quot;year&quot;: 2023,
+    &quot;beenUsed&quot;: false
+  }
+]
+</code></pre>
+<h2>Manual Updates</h2>
+<p>If you prefer to manually curate your lists, you can:</p>
+<ol>
+<li>Edit the JSON files directly</li>
+<li>Run the game in offline mode using your curated lists</li>
+</ol>
+<h2>Future Enhancements</h2>
+<p>Consider implementing:</p>
+<ul>
+<li>Scheduled automatic updates (cron jobs)</li>
+<li>User voting system for favorites</li>
+<li>Category suggestions from players</li>
+<li>Data validation to ensure quality entries</li>
+</ul>
+<pre><code></code></pre>

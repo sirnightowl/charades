@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('../src/data/charades.json');
+      const response = await fetch('/data/charades.json');
       charadesData = await response.json();
     } catch (error) {
       console.error('Error fetching charades data:', error);
