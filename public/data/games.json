@@ -1,0 +1,50 @@
+[
+  {
+    "id": "game_1",
+    "title": "The Legend of Zelda: Breath of the Wild",
+    "developer": "Nintendo EPD",
+    "year": 2017,
+    "genre": ["Action", "Adventure"],
+    "rating": 9.4,
+    "description": "Open-world action-adventure game that re-invents the Zelda formula with stunning visuals and a vast world to explore.",
+    "platform": ["Nintendo Switch", "Wii U"],
+    "cover": "",
+    "trailer": "",
+    "publisher": "Nintendo",
+    "language": "English",
+    "released": true,
+    "esrbRating": "E10+"
+  },
+  {
+    "id": "game_2",
+    "title": "Red Dead Redemption 2",
+    "developer": "Rockstar Games",
+    "year": 2018,
+    "genre": ["Action", "Adventure", "Western"],
+    "rating": 9.3,
+    "description": "An epic tale of life in America's unforgiving heartland, featuring a massive, living open world.",
+    "platform": ["PlayStation 4", "Xbox One", "PC"],
+    "cover": "",
+    "trailer": "",
+    "publisher": "Rockstar Games",
+    "language": "English",
+    "released": true,
+    "esrbRating": "M"
+  },
+  {
+    "id": "game_3",
+    "title": "Portal",
+    "developer": "Valve Corporation",
+    "year": 2007,
+    "genre": ["Puzzle", "First-Person Shooter"],
+    "rating": 9.0,
+    "description": "A first-person puzzle-platform video game that uses the innovative Portal Gun to create a complex array of interesting and challenging puzzles.",
+    "platform": ["PC", "PlayStation 3", "Xbox 360"],
+    "cover": "",
+    "trailer": "",
+    "publisher": "Valve Corporation",
+    "language": "English",
+    "released": true,
+    "esrbRating": "T"
+  }
+]
