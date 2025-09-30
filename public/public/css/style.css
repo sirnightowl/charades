@@ -1,0 +1,169 @@
+body {
+  background: #3F4346;
+  font-family: "Nunito", sans-serif;
+}
+
+button#info {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+.h1, h1 {
+  font-size: 2.25rem !important;
+}
+
+.lead {
+  color: #a7a7a7;
+}
+
+#actions {
+  position: fixed;
+  display: flex;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  background: #252A34;
+  padding: 10px 0px;
+}
+#actions button {
+  width: 20%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#actions button svg {
+  width: 32px;
+  fill: #fff;
+  margin-right: 6px;
+  margin: 0 auto;
+}
+#actions button span {
+  width: 100%;
+  display: block;
+  font-size: 14px;
+}
+#actions button.btn {
+  font-weight: 600;
+  color: #fff;
+  border-radius: 0;
+}
+#actions button.btn:hover, #actions button.btn:focus {
+  text-decoration: underline;
+}
+#actions #getfilm:hover, #actions #getfilm:focus {
+  background: #d44040;
+  color: #000;
+}
+#actions #getfilm:hover svg, #actions #getfilm:focus svg {
+  fill: #000;
+}
+#actions #getshow:hover, #actions #getshow:focus {
+  background: #9B4AFB;
+  color: #000;
+}
+#actions #getshow:hover svg, #actions #getshow:focus svg {
+  fill: #000;
+}
+#actions #getgame:hover, #actions #getgame:focus {
+  background: #67A1E2;
+  color: #000;
+}
+#actions #getgame:hover svg, #actions #getgame:focus svg {
+  fill: #000;
+}
+#actions #getsong:hover, #actions #getsong:focus {
+  background: #F8B34C;
+  color: #000;
+}
+#actions #getsong:hover svg, #actions #getsong:focus svg {
+  fill: #000;
+}
+#actions #getbook:hover, #actions #getbook:focus {
+  background: #01C271;
+  color: #000;
+}
+#actions #getbook:hover svg, #actions #getbook:focus svg {
+  fill: #000;
+}
+
+#wrapper {
+  height: calc(100vh - 60px);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+}
+
+#result.active {
+  color: #fff;
+}
+#result.active #result-year {
+  margin-top: 0;
+}
+
+#result {
+  color: #fff;
+  background: #000;
+  border-radius: 20px;
+  height: 100%;
+  padding: 30px;
+  width: 320px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  flex-direction: column;
+  position: relative;
+}
+#result span {
+  display: inline-block;
+  align-self: flex-start;
+  color: #000;
+  padding: 0px 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+#result span {
+  background: #FFF;
+}
+#result span.film {
+  background: #d44040;
+}
+#result span.tvshow {
+  background: #9B4AFB;
+}
+#result span.game {
+  background: #67A1E2;
+}
+#result span.song {
+  background: #F8B34C;
+}
+#result span.book {
+  background: #01C271;
+}
+#result #result-author {
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  padding-top: 10px;
+}
+
+a.social-link {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+a.social-link svg {
+  width: 24px;
+}
+
+@media (max-width: 576px) {
+  #actions button span {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
