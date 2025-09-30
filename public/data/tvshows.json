@@ -1,0 +1,47 @@
+[
+  {
+    "id": "tvshow_1",
+    "title": "Breaking Bad",
+    "year": 2008,
+    "genre": ["Drama", "Crime", "Thriller"],
+    "rating": 9.5,
+    "description": "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+    "cast": ["Bryan Cranston", "Aaron Paul", "Anna Gunn"],
+    "creator": "Vince Gilligan",
+    "episodes": 62,
+    "network": "AMC",
+    "language": "English",
+    "country": "USA",
+    "released": true
+  },
+  {
+    "id": "tvshow_2",
+    "title": "Game of Thrones",
+    "year": 2011,
+    "genre": ["Drama", "Fantasy"],
+    "rating": 9.2,
+    "description": "Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns.",
+    "cast": ["Emilia Clarke", "Peter Dinklage", "Kit Harington"],
+    "creator": "David Benioff & D.B. Weiss",
+    "episodes": 73,
+    "network": "HBO",
+    "language": "English",
+    "country": "USA",
+    "released": true
+  },
+  {
+    "id": "tvshow_3",
+    "title": "The Simpsons",
+    "year": 1989,
+    "genre": ["Animation", "Comedy"],
+    "rating": 8.7,
+    "description": "The satirical animated series centered around a working-class family in the fictional town of Springfield.",
+    "cast": ["Dan Castellaneta", "Julie Kavner", "Nancy Cartwright"],
+    "creator": "Matt Groening",
+    "episodes": 700,
+    "network": "Fox",
+    "language": "English",
+    "country": "USA",
+    "released": true
+  }
+]

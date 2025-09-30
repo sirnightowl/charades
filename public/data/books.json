@@ -1,0 +1,50 @@
+[
+  {
+    "id": "book_1",
+    "title": "To Kill a Mockingbird",
+    "author": "Harper Lee",
+    "year": 1960,
+    "genre": ["Fiction", "Classic"],
+    "rating": 8.3,
+    "description": "The unforgettable novel of a childhood in a sleepy Southern town and the crisis of conscience that rocked it.",
+    "pages": 376,
+    "isbn": "978-0-06-112008-4",
+    "language": "English",
+    "publisher": "J.B. Lippincott & Co.",
+    "cover": "",
+    "format": "paperback",
+    "released": true
+  },
+  {
+    "id": "book_2",
+    "title": "1984",
+    "author": "George Orwell",
+    "year": 1949,
+    "genre": ["Dystopian", "Political Fiction"],
+    "rating": 8.1,
+    "description": "A masterpiece of literature, the definitive dystopian novel that chillingly looks at the dehumanizing effects of totalitarian surveillance.",
+    "pages": 328,
+    "isbn": "978-0-452-28423-4",
+    "language": "English",
+    "publisher": "Secker & Warburg",
+    "cover": "",
+    "format": "paperback",
+    "released": true
+  },
+  {
+    "id": "book_3",
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "year": 1813,
+    "genre": ["Romance", "Classic"],
+    "rating": 8.2,
+    "description": "A romantic novel that critiques the British landed gentry at the end of the 18th century.",
+    "pages": 432,
+    "isbn": "978-0-14-143951-8",
+    "language": "English",
+    "publisher": "T. Egerton",
+    "cover": "",
+    "format": "paperback",
+    "released": true
+  }
+]

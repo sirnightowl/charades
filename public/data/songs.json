@@ -1,0 +1,41 @@
+[
+  {
+    "id": "song_1",
+    "title": "Bohemian Rhapsody",
+    "artist": "Queen",
+    "year": 1975,
+    "genre": ["Rock", "Progressive Rock"],
+    "rating": 9.0,
+    "description": "An epic rock song that blends elements of progressive rock, hard rock, and opera.",
+    "album": "A Night at the Opera",
+    "duration": "5:55",
+    "language": "English",
+    "released": true
+  },
+  {
+    "id": "song_2",
+    "title": "Imagine",
+    "artist": "John Lennon",
+    "year": 1971,
+    "genre": ["Soft Rock", "Pop"],
+    "rating": 8.8,
+    "description": "A song encouraging a world at peace without the barriers of religions, countries, or possessions.",
+    "album": "Imagine",
+    "duration": "3:07",
+    "language": "English",
+    "released": true
+  },
+  {
+    "id": "song_3",
+    "title": "Hotel California",
+    "artist": "Eagles",
+    "year": 1976,
+    "genre": ["Rock", "Soft Rock"],
+    "rating": 8.9,
+    "description": "A song that explores the dark side of the American dream with its famous guitar solo.",
+    "album": "Hotel California",
+    "duration": "6:30",
+    "language": "English",
+    "released": true
+  }
+]

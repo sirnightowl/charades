@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charades Settings Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .status-check {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .warning { background-color: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+    <h1>Charades Settings Functionality Test</h1>
+    
+    <div id="statusContainer">
+        <h2>JavaScript Component Status:</h2>
+        <div id="appStatus" class="status-check">App instance: Checking...</div>
+        <div id="settingsStatus" class="status-check">Settings manager: Checking...</div>
+        <div id="usageTrackerStatus" class="status-check">Usage tracker: Checking...</div>
+        <div id="eventListenersStatus" class="status-check">Event listeners: Checking...</div>
+        <div id="colorsStatus" class="status-check">Color palette: Checking...</div>
+    </div>
+    
+    <div id="testResult" style="margin-top: 20px;">
+        <h2>Test Results:</h2>
+        <button id="runFunctionalTest">Run Functional Test</button>
+        <div id="functionalTestOutput" style="margin-top:10px; padding: 10px; background-color: #f0f0f0;"></div>
+    </div>
+
+    <script src="/js/settings.js"></script>
+    <script src="/js/utils/usage-tracker.js"></script>
+    <script>
+        // Wait for DOM to load to ensure all scripts are loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if App is available
+            const appStatus = document.getElementById('appStatus');
+            if (window.App) {
+                appStatus.textContent = 'App instance: Available';
+                appStatus.className = 'status-check success';
+            } else {
+                appStatus.textContent = 'App instance: NOT FOUND - This may be loaded later';
+                appStatus.className = 'status-check warning';
+            }
+            
+            // Check if SettingsManager is available
+            const settingsStatus = document.getElementById('settingsStatus');
+            if (window.SettingsManager) {
+                settingsStatus.textContent = 'Settings manager: Available';
+                settingsStatus.className = 'status-check success';
+            } else {
+                settingsStatus.textContent = 'Settings manager: NOT FOUND';
+                settingsStatus.className = 'status-check error';
+            }
+            
+            // Check if UsageTracker is available
+            const usageTrackerStatus = document.getElementById('usageTrackerStatus');
+            if (window.UsageTracker) {
+                usageTrackerStatus.textContent = 'Usage tracker: Available';
+                usageTrackerStatus.className = 'status-check success';
+            } else {
+                usageTrackerStatus.textContent = 'Usage tracker: NOT FOUND';
+                usageTrackerStatus.className = 'status-check error';
+            }
+            
+            // Check for settings button in DOM
+            const eventListenersStatus = document.getElementById('eventListenersStatus');
+            const settingsBtn = document.getElementById('settings-btn');
+            if (settingsBtn) {
+                eventListenersStatus.textContent = 'Settings button: Found in DOM';
+                eventListenersStatus.className = 'status-check success';
+            } else {
+                eventListenersStatus.textContent = 'Settings button: NOT FOUND in DOM';
+                eventListenersStatus.className = 'status-check error';
+            }
+            
+            // Check color palette
+            const colorsStatus = document.getElementById('colorsStatus');
+            if (window.settingsManager && window.settingsManager.colorPalette) {
+                colorsStatus.textContent = `Color palette: Found ${window.settingsManager.colorPalette.length} colors`;
+                colorsStatus.className = 'status-check success';
+            } else {
+                colorsStatus.textContent = 'Color palette: NOT FOUND - settings manager may not be initialized yet';
+                colorsStatus.className = 'status-check warning';
+            }
+            
+            // Add functional test
+            document.getElementById('runFunctionalTest').addEventListener('click', function() {
+                const output = document.getElementById('functionalTestOutput');
+                
+                if (window.settingsManager) {
+                    output.innerHTML = `
+                        <div><strong>Settings Manager Details:</strong></div>
+                        <div>Current background color: ${window.settingsManager.currentBgColor}</div>
+                        <div>Screen wake active: ${window.settingsManager.screenWakeActive}</div>
+                        <div>Color palette: ${window.settingsManager.colorPalette ? window.settingsManager.colorPalette.length + ' colors' : 'Not found'}</div>
+                        <div>Settings panel exists: ${!!window.settingsManager.settingsPanel}</div>
+                        <div>Settings button exists: ${!!window.settingsManager.settingsBtn}</div>
+                    `;
+                    
+                    // Try to trigger the settings panel
+                    if (window.settingsManager.settingsBtn) {
+                        output.innerHTML += '<div>Attempting to toggle settings panel...</div>';
+                        window.settingsManager.toggleSettingsPanel();
+                        setTimeout(() => {
+                            const isOpen = window.settingsManager.settingsPanel.classList.contains('open');
+                            output.innerHTML += `<div>Settings panel open: ${isOpen}</div>`;
+                        }, 500);
+                    }
+                } else {
+                    output.innerHTML = 'Settings manager is not available. The settings functionality may be part of the main app and not loaded on this test page.';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

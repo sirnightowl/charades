@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Debug Charades Settings</title>
+</head>
+<body>
+    <h1>Debug Charades Settings Functionality</h1>
+    <p>Check your browser console for JavaScript errors and status updates</p>
+    
+    <div id="status"></div>
+    
+    <button id="testSettingsBtn">Test Settings Button Click</button>
+    <button id="checkElements">Check for Settings Elements</button>
+
+    <!-- Include the same scripts as the main app -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        // Log potential errors
+        window.addEventListener('error', function(e) {
+            console.error('Global error caught:', e.error, e.message, e.filename, e.lineno);
+            document.getElementById('status').innerHTML += `<p style="color:red">Error: ${e.message}</p>`;
+        });
+        
+        console.log('Scripts loading...');
+    </script>
+    <script src="/js/settings.js"></script>
+    <script src="/js/utils/screen-wake-lock.js"></script>
+    <script src="/js/utils/usage-tracker.js"></script>
+    <script src="/js/components/card-info.js"></script>
+    <script>
+        console.log('All scripts loaded, checking for settings manager...');
+        
+        // Test settings functionality after everything is loaded
+        setTimeout(() => {
+            console.log('Settings manager exists:', !!window.settingsManager);
+            if (window.settingsManager) {
+                console.log('Settings panel element exists:', !!window.settingsManager.settingsPanel);
+                console.log('Settings button element exists:', !!window.settingsManager.settingsBtn);
+            } else {
+                console.log('Settings manager not found. Checking if SettingsManager class exists:', !!window.SettingsManager);
+            }
+            
+            // Update status div
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `
+                <p>Settings manager: ${!!window.settingsManager}</p>
+                <p>SettingsManager class: ${!!window.SettingsManager}</p>
+                <p>Settings panel: ${window.settingsManager ? !!window.settingsManager.settingsPanel : 'N/A'}</p>
+                <p>Settings button: ${window.settingsManager ? !!window.settingsManager.settingsBtn : 'N/A'}</p>
+            `;
+        }, 1000);
+        
+        document.getElementById('testSettingsBtn').addEventListener('click', function() {
+            if (window.settingsManager && window.settingsManager.settingsBtn) {
+                console.log('Triggering settings button click...');
+                const event = new Event('click');
+                window.settingsManager.settingsBtn.dispatchEvent(event);
+                console.log('Settings button click event dispatched');
+            } else {
+                console.log('Settings manager or button not found');
+            }
+        });
+        
+        document.getElementById('checkElements').addEventListener('click', function() {
+            const settingsBtn = document.getElementById('settings-btn');
+            const settingsPanel = document.getElementById('settings-panel');
+            console.log('Direct DOM search - Settings button:', !!settingsBtn);
+            console.log('Direct DOM search - Settings panel:', !!settingsPanel);
+            
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML += `
+                <p>Direct DOM - Settings button: ${!!settingsBtn}</p>
+                <p>Direct DOM - Settings panel: ${!!settingsPanel}</p>
+            `;
+        });
+    </script>
+</body>
+</html>

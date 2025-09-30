@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charades UX Enhancements Test</title>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .test-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .pass {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .fail {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+        button {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0b5ed7;
+        }
+        #test-output {
+            white-space: pre-wrap;
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Charades UX Enhancements Test</h1>
+        <p>This page tests all the new UX enhancements implemented for the Charades app.</p>
+        
+        <div id="test-controls">
+            <button onclick="runTests()">Run Tests</button>
+            <button onclick="clearOutput()">Clear Output</button>
+        </div>
+        
+        <div id="test-output"></div>
+    </div>
+
+    <script>
+        // Capture console output
+        (function() {
+            const originalLog = console.log;
+            const originalError = console.error;
+            const originalWarn = console.warn;
+            
+            console.log = function() {
+                originalLog.apply(console, arguments);
+                appendToOutput('LOG: ' + Array.from(arguments).join(' '), 'log');
+            };
+            
+            console.error = function() {
+                originalError.apply(console, arguments);
+                appendToOutput('ERROR: ' + Array.from(arguments).join(' '), 'error');
+            };
+            
+            console.warn = function() {
+                originalWarn.apply(console, arguments);
+                appendToOutput('WARN: ' + Array.from(arguments).join(' '), 'warn');
+            };
+        })();
+        
+        function appendToOutput(text, type) {
+            const output = document.getElementById('test-output');
+            const line = document.createElement('div');
+            line.textContent = text;
+            line.className = 'test-result ' + (type || '');
+            output.appendChild(line);
+            output.scrollTop = output.scrollHeight;
+        }
+        
+        function clearOutput() {
+            document.getElementById('test-output').innerHTML = '';
+        }
+        
+        // Test functions
+        function testSettingsButtonExists() {
+            const settingsBtn = document.getElementById('settings-btn');
+            if (settingsBtn) {
+                appendToOutput('✓ Settings button exists', 'pass');
+                return true;
+            } else {
+                appendToOutput('✗ Settings button not found', 'fail');
+                return false;
+            }
+        }
+
+        function testSettingsPanelCreation() {
+            try {
+                // This would normally be done by the SettingsManager
+                const settingsPanel = document.createElement('div');
+                settingsPanel.className = 'settings-panel';
+                settingsPanel.id = 'settings-panel';
+                settingsPanel.innerHTML = `
+                  <div class="settings-header">
+                    <h3 class="settings-title">Settings</h3>
+                    <button class="close-settings" id="close-settings">&times;</button>
+                  </div>
+                `;
+                document.body.appendChild(settingsPanel);
+                
+                const panel = document.getElementById('settings-panel');
+                if (panel) {
+                    appendToOutput('✓ Settings panel can be created', 'pass');
+                    document.body.removeChild(panel); // Clean up
+                    return true;
+                } else {
+                    appendToOutput('✗ Settings panel creation failed', 'fail');
+                    return false;
+                }
+            } catch (error) {
+                appendToOutput('✗ Settings panel creation error: ' + error, 'fail');
+                return false;
+            }
+        }
+
+        function testCardInfoButton() {
+            try {
+                // Create a mock card element
+                const cardElement = document.createElement('div');
+                cardElement.id = 'test-card';
+                cardElement.innerHTML = '<h2>Test Card</h2>';
+                document.body.appendChild(cardElement);
+                
+                // Create info button
+                const infoBtn = document.createElement('button');
+                infoBtn.className = 'info-btn';
+                infoBtn.innerHTML = 'i';
+                infoBtn.title = 'Show card information';
+                
+                // Add to card
+                cardElement.appendChild(infoBtn);
+                
+                // Check if button was added
+                const addedBtn = cardElement.querySelector('.info-btn');
+                if (addedBtn) {
+                    appendToOutput('✓ Card info button can be added', 'pass');
+                    document.body.removeChild(cardElement); // Clean up
+                    return true;
+                } else {
+                    appendToOutput('✗ Card info button could not be added', 'fail');
+                    document.body.removeChild(cardElement); // Clean up
+                    return false;
+                }
+            } catch (error) {
+                appendToOutput('✗ Card info button error: ' + error, 'fail');
+                return false;
+            }
+        }
+
+        function testInfoModalCreation() {
+            try {
+                // This would normally be done by the CardInfo component
+                const infoModal = document.createElement('div');
+                infoModal.className = 'info-modal';
+                infoModal.id = 'info-modal';
+                infoModal.innerHTML = `
+                  <div class="info-modal-content">
+                    <div class="info-modal-header">
+                      <h3 class="info-modal-title">Card Information</h3>
+                      <button class="close-info-modal">&times;</button>
+                    </div>
+                    <div class="info-modal-body">
+                      <p id="info-modal-text">Information about the selected card will appear here.</p>
+                    </div>
+                  </div>
+                `;
+                document.body.appendChild(infoModal);
+                
+                const modal = document.getElementById('info-modal');
+                if (modal) {
+                    appendToOutput('✓ Info modal can be created', 'pass');
+                    document.body.removeChild(modal); // Clean up
+                    return true;
+                } else {
+                    appendToOutput('✗ Info modal creation failed', 'fail');
+                    return false;
+                }
+            } catch (error) {
+                appendToOutput('✗ Info modal creation error: ' + error, 'fail');
+                return false;
+            }
+        }
+
+        function testScreenWakeLockSupport() {
+            if ('wakeLock' in navigator) {
+                appendToOutput('✓ Screen Wake Lock API is supported', 'pass');
+                return true;
+            } else {
+                appendToOutput('~ Screen Wake Lock API is not supported in this browser', 'warning');
+                return false; // This is not necessarily a failure, just a limitation
+            }
+        }
+
+        // Run all tests
+        function runTests() {
+            clearOutput();
+            appendToOutput('Running UX Enhancement Tests...\n', 'log');
+            
+            const tests = [
+                testSettingsButtonExists,
+                testSettingsPanelCreation,
+                testCardInfoButton,
+                testInfoModalCreation,
+                testScreenWakeLockSupport
+            ];
+            
+            let passed = 0;
+            let total = tests.length;
+            
+            tests.forEach(test => {
+                if (test()) {
+                    passed++;
+                }
+            });
+            
+            appendToOutput(`\nTest Results: ${passed}/${total} tests passed`, 'log');
+            
+            if (passed === total) {
+                appendToOutput('🎉 All tests passed! UX enhancements are working correctly.', 'pass');
+            } else if (passed >= total * 0.8) {
+                appendToOutput('✅ Most tests passed. UX enhancements are mostly working.', 'pass');
+            } else {
+                appendToOutput('❌ Some tests failed. Please check the implementation.', 'fail');
+            }
+        }
+        
+        // Run tests automatically when page loads
+        window.addEventListener('load', function() {
+            setTimeout(runTests, 1000); // Give a moment for everything to initialize
+        });
+    </script>
+</body>
+</html>

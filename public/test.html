@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Charades. For family nights.">
+    <meta name="author" content="@SirNightOwl">
+    
+    <title>Charades - Test Page</title>
+    
+    <!-- Google font - Nunito -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+   
+    <!-- Bootstrap CSS and JS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/settings.css">
+</head>
+
+<body>
+    <!-- Settings button -->
+    <div id="settings-btn" class="settings-btn">
+        <svg class="settings-icon" viewBox="0 0 24 24">
+            <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+        </svg>
+    </div>
+
+    <div id="wrapper">
+        <div id="result" class="bg shadow-lg">
+            <h2 id="result-title" class="h1">Charades.</h2>
+            <span id="result-category">Made by @sirnightowl</span>
+            <p id="result-author" class="mt-auto mb-0">Select a category below to draw a card</p>
+            <p id="result-year" class="lead"></p>
+        </div>
+    </div>
+
+    <div id="actions" class="d-flex justify-content-around">
+        <button id="getfilm" class="btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>movie</title><path d="M18,4L20,8H17L15,4H13L15,8H12L10,4H8L10,8H7L5,4H4A2,2 0 0,0 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V4H18Z" /></svg>
+            <span>Film</span>
+        </button>
+        
+        <button id="getshow" class="btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>television-classic</title><path d="M8.16,3L6.75,4.41L9.34,7H4C2.89,7 2,7.89 2,9V19C2,20.11 2.89,21 4,21H20C21.11,21 22,20.11 22,19V9C22,7.89 21.11,7 20,7H14.66L17.25,4.41L15.84,3L12,6.84L8.16,3M4,9H17V19H4V9M19.5,9A1,1 0 0,1 20.5,10A1,1 0 0,1 19.5,11A1,1 0 0,1 18.5,10A1,1 0 0,1 19.5,9M19.5,12A1,1 0 0,1 20.5,13A1,1 0 0,1 19.5,14A1,1 0 0,1 18.5,13A1,1 0 0,1 19.5,12Z" /></svg>
+            <span>TV show</span>
+        </button>
+        
+        <button id="getgame" class="btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>controller-classic</title><path d="M6,7H18A5,5 0 0,1 23,12A5,5 0 0,1 18,17C16.36,17 14.91,16.21 14,15H10C9.09,16.21 7.64,17 6,17A5,5 0 0,1 1,12A5,5 0 0,1 6,7M19.75,9.5A1.25,1.25 0 0,0 18.5,10.75A1.25,1.25 0 0,0 19.75,12A1.25,1.25 0 0,0 21,10.75A1.25,1.25 0 0,0 19.75,9.5M17.25,12A1.25,1.25 0 0,0 16,13.25A1.25,1.25 0 0,0 17.25,14.5A1.25,1.25 0 0,0 18.5,13.25A1.25,1.25 0 0,0 17.25,12M5,9V11H3V13H5V15H7V13H9V11H7V9H5Z" /></svg>
+            <span>Video game</span>
+        </button>
+        
+        <button id="getsong" class="btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>music</title><path d="M21,3V15.5A3.5,3.5 0 0,1 17.5,19A3.5,3.5 0 0,1 14,15.5A3.5,3.5 0 0,1 17.5,12C18.04,12 18.55,12.12 19,12.34V6.47L9,8.6V17.5A3.5,3.5 0 0,1 5.5,21A3.5,3.5 0 0,1 2,17.5A3.5,3.5 0 0,1 5.5,14C6.04,14 6.55,14.12 7,14.34V6L21,3Z" /></svg>
+            <span>Song</span>
+        </button>
+        
+        <button id="getbook" class="btn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>book-open-variant</title><path d="M17.5,14.33C18.29,14.33 19.13,14.41 20,14.57V16.07C19.38,15.91 18.54,15.83 17.5,15.83C15.6,15.83 14.11,16.16 13,16.82V15.13C14.17,14.6 15.67,14.33 17.5,14.33M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" /></svg>
+            <span>Book</span>
+        </button>
+    </div>
+
+    <!-- Test script to verify our features work -->
+    <script>
+        // Simple test to verify JavaScript is working
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Test page loaded');
+            
+            // Test button functionality
+            const buttons = document.querySelectorAll('#actions button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    console.log('Button clicked:', this.id);
+                    document.getElementById('result-title').textContent = 'Test Successful!';
+                    document.getElementById('result-category').textContent = 'JavaScript Working';
+                    document.getElementById('result-author').textContent = 'Click the settings button to test new features';
+                    document.getElementById('result-year').textContent = '';
+                });
+            });
+            
+            // Test settings button
+            const settingsBtn = document.getElementById('settings-btn');
+            if (settingsBtn) {
+                settingsBtn.addEventListener('click', function() {
+                    console.log('Settings button clicked');
+                    alert('Settings button is working! The full settings panel would open here.');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
