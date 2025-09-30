@@ -11,6 +11,7 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("./src/img/");
     eleventyConfig.addPassthroughCopy("./src/scripts/");
     eleventyConfig.addPassthroughCopy("./src/js/");
+    eleventyConfig.addPassthroughCopy("./src/js/");
     eleventyConfig.addPassthroughCopy("./apple-touch-icon.png");
     eleventyConfig.addPassthroughCopy("./favicon-16x16.png");
     eleventyConfig.addPassthroughCopy("./favicon-32x32.png");
@@ -27,7 +28,7 @@ module.exports = function(eleventyConfig) {
     htmlTemplateEngine: 'njk',
     dir: {
       input: "src",
-      output: "public"
+      output: "docs"
     },
     pathPrefix: "/charades/"
   };
