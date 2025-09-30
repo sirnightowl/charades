@@ -9,7 +9,7 @@
     "watch:eleventy": "eleventy --serve",
     "build:eleventy": "eleventy",
     "start": "npm-run-all build:sass --parallel watch:*",
-    "build": "npm-run-all build:*"
+    "build": "npm-run-all build:* && mkdir -p docs/js && cp -r docs/public/js/* docs/js/ && rm -rf docs/public"
   },
   "keywords": [],
   "author": "",
