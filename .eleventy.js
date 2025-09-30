@@ -10,7 +10,13 @@ module.exports = function(eleventyConfig) {
     eleventyConfig.addWatchTarget("./src/sass/");
     eleventyConfig.addPassthroughCopy("./src/img/");
     eleventyConfig.addPassthroughCopy("./src/scripts/");
-    eleventyConfig.addPassthroughCopy("./src/js/");
+    eleventyConfig.addPassthroughCopy("./public/js/components/");
+    eleventyConfig.addPassthroughCopy("./public/js/models/");
+    eleventyConfig.addPassthroughCopy("./public/js/services/");
+    eleventyConfig.addPassthroughCopy("./public/js/tests/");
+    eleventyConfig.addPassthroughCopy("./public/js/utils/");
+    eleventyConfig.addPassthroughCopy("./public/js/app.js");
+    eleventyConfig.addPassthroughCopy("./public/js/settings.js");
     eleventyConfig.addPassthroughCopy("./apple-touch-icon.png");
     eleventyConfig.addPassthroughCopy("./favicon-16x16.png");
     eleventyConfig.addPassthroughCopy("./favicon-32x32.png");
@@ -27,7 +33,7 @@ module.exports = function(eleventyConfig) {
     htmlTemplateEngine: 'njk',
     dir: {
       input: "src",
-      output: "public"
+      output: "docs"
     },
     pathPrefix: "/charades/"
   };
