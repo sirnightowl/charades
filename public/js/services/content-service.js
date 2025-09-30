@@ -263,15 +263,42 @@ class ContentService {
     );
   }
 
-  // Get random item from specified type
+  // Initialize UsageTracker
+  initUsageTracker() {
+    if (window.UsageTracker) {
+      this.usageTracker = new window.UsageTracker();
+    } else {
+      console.warn('UsageTracker not available, continuing without usage tracking');
+      this.usageTracker = null;
+    }
+  }
+
+  // Get random item from specified type, considering usage tracking
   getRandomContent(type) {
     const content = this.getContentByType(type);
     if (!Array.isArray(content) || content.length === 0) {
       return null;
     }
     
-    const randomIndex = Math.floor(Math.random() * content.length);
-    return content[randomIndex];
+    // Use usage tracker if available to get unused items
+    let availableItems = content;
+    if (this.usageTracker) {
+      availableItems = this.usageTracker.getUnusedItems(type, content);
+      if (availableItems.length === 0) {
+        // Fallback if for some reason no unused items are found
+        availableItems = content;
+      }
+    }
+    
+    const randomIndex = Math.floor(Math.random() * availableItems.length);
+    const selected = availableItems[randomIndex];
+    
+    // Mark the item as used if usage tracker is available
+    if (this.usageTracker && selected && selected.id) {
+      this.usageTracker.markUsed(type, selected.id);
+    }
+    
+    return selected;
   }
 
   // Find content by ID

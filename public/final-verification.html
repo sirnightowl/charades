@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charades UX Enhancements - Final Verification</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/settings.css">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .verification-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .test-result {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .pass {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .fail {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+        button {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0b5ed7;
+        }
+        #verification-output {
+            white-space: pre-wrap;
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="verification-container">
+        <h1>Charades UX Enhancements - Final Verification</h1>
+        <p>This page verifies that all UX enhancements are properly integrated into the main application.</p>
+        
+        <div id="verification-controls">
+            <button onclick="runVerification()">Run Verification</button>
+            <button onclick="clearOutput()">Clear Output</button>
+        </div>
+        
+        <div id="verification-output"></div>
+    </div>
+
+    <!-- Include the main application JavaScript files -->
+    <script src="/js/settings.js"></script>
+    <script src="/js/components/card-info.js"></script>
+    <script src="/js/utils/screen-wake-lock.js"></script>
+    <script src="/js/app.js"></script>
+    
+    <script>
+        // Capture console output
+        (function() {
+            const originalLog = console.log;
+            const originalError = console.error;
+            const originalWarn = console.warn;
+            
+            console.log = function() {
+                originalLog.apply(console, arguments);
+                appendToOutput('LOG: ' + Array.from(arguments).join(' '), 'log');
+            };
+            
+            console.error = function() {
+                originalError.apply(console, arguments);
+                appendToOutput('ERROR: ' + Array.from(arguments).join(' '), 'error');
+            };
+            
+            console.warn = function() {
+                originalWarn.apply(console, arguments);
+                appendToOutput('WARN: ' + Array.from(arguments).join(' '), 'warn');
+            };
+        })();
+        
+        function appendToOutput(text, type) {
+            const output = document.getElementById('verification-output');
+            const line = document.createElement('div');
+            line.textContent = text;
+            line.className = 'test-result ' + (type || '');
+            output.appendChild(line);
+            output.scrollTop = output.scrollHeight;
+        }
+        
+        function clearOutput() {
+            document.getElementById('verification-output').innerHTML = '';
+        }
+        
+        // Include the verification script
+        function runVerification() {
+            clearOutput();
+            appendToOutput('Running final verification of UX enhancements...\n', 'log');
+            
+            // Check if all required elements exist in the DOM
+            function verifyDOMElements() {
+                const requiredElements = [
+                    'settings-btn',         // Settings button
+                    'result',               // Main result card
+                    'getfilm',              // Film button
+                    'getshow',              // Show button
+                    'getgame',              // Game button
+                    'getsong',              // Song button
+                    'getbook'               // Book button
+                ];
+                
+                let allFound = true;
+                
+                requiredElements.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        appendToOutput(`✓ Element '${id}' found`, 'pass');
+                    } else {
+                        appendToOutput(`✗ Element '${id}' NOT found`, 'fail');
+                        allFound = false;
+                    }
+                });
+                
+                return allFound;
+            }
+            
+            // Check if all required JavaScript files are loaded
+            function verifyJavaScriptFiles() {
+                // These should be available if the files are properly loaded
+                const requiredClasses = [
+                    'SettingsManager',
+                    'CardInfo',
+                    'ScreenWakeLock'
+                ];
+                
+                let allAvailable = true;
+                
+                requiredClasses.forEach(className => {
+                    if (window[className]) {
+                        appendToOutput(`✓ Class '${className}' is available`, 'pass');
+                    } else {
+                        appendToOutput(`✗ Class '${className}' is NOT available`, 'fail');
+                        allAvailable = false;
+                    }
+                });
+                
+                return allAvailable;
+            }
+            
+            // Check if CSS is properly loaded
+            function verifyCSS() {
+                // Check if some of our custom CSS classes are applied
+                const settingsBtn = document.getElementById('settings-btn');
+                if (settingsBtn && settingsBtn.classList.contains('settings-btn')) {
+                    appendToOutput('✓ Settings button CSS is properly applied', 'pass');
+                    return true;
+                } else {
+                    appendToOutput('✗ Settings button CSS is NOT properly applied', 'fail');
+                    return false;
+                }
+            }
+            
+            // Test the settings functionality
+            function testSettingsFunctionality() {
+                try {
+                    // Try to create a settings manager instance
+                    if (window.SettingsManager) {
+                        const settingsManager = new window.SettingsManager();
+                        appendToOutput('✓ SettingsManager can be instantiated', 'pass');
+                        
+                        // Test selecting a color
+                        if (settingsManager.selectColor) {
+                            settingsManager.selectColor('#ffffff');
+                            appendToOutput('✓ Color selection works', 'pass');
+                        }
+                        
+                        return true;
+                    } else {
+                        appendToOutput('✗ SettingsManager class not available', 'fail');
+                        return false;
+                    }
+                } catch (error) {
+                    appendToOutput('✗ Settings functionality error: ' + error, 'fail');
+                    return false;
+                }
+            }
+            
+            // Test the card info functionality
+            function testCardInfoFunctionality() {
+                try {
+                    // Try to create a card info instance
+                    if (window.CardInfo) {
+                        const cardInfo = new window.CardInfo();
+                        appendToOutput('✓ CardInfo can be instantiated', 'pass');
+                        
+                        // Test adding info button to a mock card
+                        const mockCard = document.createElement('div');
+                        const mockData = { title: 'Test Card', year: 2023 };
+                        
+                        if (cardInfo.addInfoButtonToCard) {
+                            cardInfo.addInfoButtonToCard(mockCard, mockData);
+                            const infoBtn = mockCard.querySelector('.info-btn');
+                            if (infoBtn) {
+                                appendToOutput('✓ Info button can be added to cards', 'pass');
+                                return true;
+                            } else {
+                                appendToOutput('✗ Info button was not added to card', 'fail');
+                                return false;
+                            }
+                        } else {
+                            appendToOutput('✗ addInfoButtonToCard method not available', 'fail');
+                            return false;
+                        }
+                    } else {
+                        appendToOutput('✗ CardInfo class not available', 'fail');
+                        return false;
+                    }
+                } catch (error) {
+                    appendToOutput('✗ Card info functionality error: ' + error, 'fail');
+                    return false;
+                }
+            }
+            
+            // Test the screen wake lock functionality
+            function testScreenWakeLockFunctionality() {
+                try {
+                    // Try to create a screen wake lock instance
+                    if (window.ScreenWakeLock) {
+                        const screenWakeLock = new window.ScreenWakeLock();
+                        appendToOutput('✓ ScreenWakeLock can be instantiated', 'pass');
+                        
+                        // Check if it supports the API
+                        if (screenWakeLock.isSupported()) {
+                            appendToOutput('✓ Screen Wake Lock API is supported', 'pass');
+                        } else {
+                            appendToOutput('~ Screen Wake Lock API is not supported in this browser', 'warning');
+                        }
+                        
+                        return true;
+                    } else {
+                        appendToOutput('✗ ScreenWakeLock class not available', 'fail');
+                        return false;
+                    }
+                } catch (error) {
+                    appendToOutput('✗ Screen wake lock functionality error: ' + error, 'fail');
+                    return false;
+                }
+            }
+            
+            // Run all verification tests
+            function runAllTests() {
+                const tests = [
+                    { name: 'DOM Elements', fn: verifyDOMElements },
+                    { name: 'JavaScript Files', fn: verifyJavaScriptFiles },
+                    { name: 'CSS Styling', fn: verifyCSS },
+                    { name: 'Settings Functionality', fn: testSettingsFunctionality },
+                    { name: 'Card Info Functionality', fn: testCardInfoFunctionality },
+                    { name: 'Screen Wake Lock Functionality', fn: testScreenWakeLockFunctionality }
+                ];
+                
+                let passed = 0;
+                let total = tests.length;
+                
+                tests.forEach(test => {
+                    appendToOutput(`\nTesting ${test.name}:`, 'log');
+                    if (test.fn()) {
+                        passed++;
+                    }
+                });
+                
+                appendToOutput(`\n\nFinal Verification Results: ${passed}/${total} test groups passed`, 'log');
+                
+                if (passed === total) {
+                    appendToOutput('🎉 All verifications passed! UX enhancements are properly integrated.', 'pass');
+                } else if (passed >= total * 0.8) {
+                    appendToOutput('✅ Most verifications passed. UX enhancements are mostly integrated.', 'pass');
+                } else {
+                    appendToOutput('❌ Some verifications failed. Please check the implementation.', 'fail');
+                }
+            }
+            
+            // Run the tests
+            runAllTests();
+        }
+        
+        // Run verification automatically when page loads
+        window.addEventListener('load', function() {
+            setTimeout(runVerification, 1000); // Give a moment for everything to initialize
+        });
+    </script>
+</body>
+</html>

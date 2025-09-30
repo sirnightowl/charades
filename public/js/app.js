@@ -31,6 +31,12 @@ class App {
       await this.contentService.loadAllContent();
       console.log('Content loaded successfully');
       
+      // Initialize usage tracker after content load
+      this.contentService.initUsageTracker();
+      
+      // Initialize new UX features
+      this.initUXFeatures();
+      
       // Update the UI with content stats
       this.updateContentStats();
       
@@ -51,6 +57,27 @@ class App {
     }
   }
 
+  // Initialize UX features (settings, card info, screen wake lock)
+  initUXFeatures() {
+    // Initialize settings manager if available
+    if (window.SettingsManager) {
+      this.settingsManager = new window.SettingsManager();
+      console.log('Settings manager initialized');
+    }
+    
+    // Initialize card info component if available
+    if (window.CardInfo) {
+      this.cardInfo = new window.CardInfo();
+      console.log('Card info component initialized');
+    }
+    
+    // Initialize screen wake lock if available
+    if (window.ScreenWakeLock) {
+      this.screenWakeLock = new window.ScreenWakeLock();
+      console.log('Screen wake lock initialized');
+    }
+  }
+
   // Set up event listeners for the application
   setupEventListeners() {
     // Set up the existing buttons to work with our new system
@@ -65,6 +92,10 @@ class App {
       filmButton.addEventListener('click', async (e) => {
         e.preventDefault();
         await this.selectCategoryAndShowItem('movies');
+        // Request screen wake lock if enabled
+        if (this.screenWakeLock && this.settingsManager.screenWakeActive) {
+          await this.screenWakeLock.requestWakeLock();
+        }
       });
     }
 
@@ -73,6 +104,10 @@ class App {
       showButton.addEventListener('click', async (e) => {
         e.preventDefault();
         await this.selectCategoryAndShowItem('tvshows');
+        // Request screen wake lock if enabled
+        if (this.screenWakeLock && this.settingsManager.screenWakeActive) {
+          await this.screenWakeLock.requestWakeLock();
+        }
       });
     }
 
@@ -81,6 +116,10 @@ class App {
       gameButton.addEventListener('click', async (e) => {
         e.preventDefault();
         await this.selectCategoryAndShowItem('games');
+        // Request screen wake lock if enabled
+        if (this.screenWakeLock && this.settingsManager.screenWakeActive) {
+          await this.screenWakeLock.requestWakeLock();
+        }
       });
     }
 
@@ -89,6 +128,10 @@ class App {
       songButton.addEventListener('click', async (e) => {
         e.preventDefault();
         await this.selectCategoryAndShowItem('songs');
+        // Request screen wake lock if enabled
+        if (this.screenWakeLock && this.settingsManager.screenWakeActive) {
+          await this.screenWakeLock.requestWakeLock();
+        }
       });
     }
 
@@ -97,6 +140,10 @@ class App {
       bookButton.addEventListener('click', async (e) => {
         e.preventDefault();
         await this.selectCategoryAndShowItem('books');
+        // Request screen wake lock if enabled
+        if (this.screenWakeLock && this.settingsManager.screenWakeActive) {
+          await this.screenWakeLock.requestWakeLock();
+        }
       });
     }
 
@@ -171,8 +218,9 @@ class App {
     const resultCategory = document.getElementById('result-category');
     const resultAuthor = document.getElementById('result-author');
     const resultYear = document.getElementById('result-year');
+    const resultElement = document.getElementById('result');
 
-    if (!resultTitle || !resultCategory || !resultAuthor || !resultYear) {
+    if (!resultTitle || !resultCategory || !resultAuthor || !resultYear || !resultElement) {
       console.error('Required result elements not found');
       return;
     }
@@ -205,6 +253,11 @@ class App {
     } else {
       resultCategory.textContent = 'Content';
       resultAuthor.textContent = 'Item';
+    }
+
+    // Add info button to the card if cardInfo is available
+    if (this.cardInfo) {
+      this.cardInfo.addInfoButtonToCard(resultElement, this.currentItem);
     }
   }
 
@@ -341,6 +394,14 @@ class App {
       deferredPrompt = e;
       console.log('Ready to install PWA');
     });
+    
+    // Initialize screen wake lock settings if available
+    if (this.settingsManager && this.screenWakeLock) {
+      // Request wake lock if it was enabled in settings
+      if (this.settingsManager.screenWakeActive) {
+        this.screenWakeLock.requestWakeLock();
+      }
+    }
   }
 
   // Show loading state
@@ -406,9 +467,11 @@ let app;
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     app = new App();
+    window.app = app; // Make app accessible globally for usage tracker
   });
 } else {
   app = new App();
+  window.app = app; // Make app accessible globally for usage tracker
 }
 
 // Export for use in other modules
