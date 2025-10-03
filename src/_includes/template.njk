@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    {% include "components/head.njk" %}
+  
+    
+    
+
+
+<body>
+  
+
+
+
+
+
+<div id="content">
+
+{% block main %}{% endblock %}
+	</div>
+
+
+<footer>
+	
+	
+	
+	
+</footer>
+
+
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- Old script.js disabled - now using new modular app.js -->
+<!-- <script src="{{ '/scripts/script.js' | url }}"></script> -->
+
+<!-- Load models first -->
+<script src="{{ '/js/models/movie-model.js' | url }}"></script>
+<script src="{{ '/js/models/book-model.js' | url }}"></script>
+<script src="{{ '/js/models/game-model.js' | url }}"></script>
+
+<!-- Load services -->
+<script src="{{ '/js/services/content-service.js' | url }}"></script>
+
+<!-- Load utils -->
+<script src="{{ '/js/utils/search-utils.js' | url }}"></script>
+<script src="{{ '/js/utils/usage-tracker.js' | url }}"></script>
+<script src="{{ '/js/utils/screen-wake-lock.js' | url }}"></script>
+<script src="{{ '/js/utils/card-interactions.js' | url }}"></script>
+
+<!-- Load components -->
+<script src="{{ '/js/components/movie-component.js' | url }}"></script>
+<script src="{{ '/js/components/book-component.js' | url }}"></script>
+<script src="{{ '/js/components/game-component.js' | url }}"></script>
+<script src="{{ '/js/components/nav-component.js' | url }}"></script>
+<script src="{{ '/js/components/card-info.js' | url }}"></script>
+
+<!-- Load settings and timer -->
+<script src="{{ '/js/settings.js' | url }}"></script>
+<script src="{{ '/js/timer.js' | url }}"></script>
+
+<!-- Load main app last -->
+<script src="{{ '/js/app.js' | url }}"></script>
+</body>
+</html>

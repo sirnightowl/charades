@@ -1,0 +1,324 @@
+$film : #d44040;
+$tvshow : #9B4AFB;
+$game : #67A1E2;
+$song : #F8B34C;
+$book : #01C271;
+
+
+
+body {background: #3F4346; font-family: 'Nunito', sans-serif;}
+
+button#info {position: fixed; top: 10px; right: 10px;}
+
+
+.h1, h1 {
+    font-size: 2.25rem !important;
+}
+.lead {color: #a7a7a7;}
+
+#actions {position: fixed; display: flex;
+bottom:0px; left:0; width: 100%; background: #252A34; padding: 10px 0px;
+	button {
+		width: 20%;
+		height: 70px; display: flex; justify-content: center; align-items: center; flex-wrap: wrap;
+		svg {width:32px; fill: #fff; margin-right: 6px; margin: 0 auto; pointer-events: none;}
+		svg * {pointer-events: none;}
+		span {width: 100%; display: block; font-size: 14px; pointer-events: none;}
+	}
+	button.btn{
+		font-weight: 600;
+	color: #fff;
+	border-radius: 0;
+	
+	&:hover, &:focus { text-decoration: underline;}
+}
+	
+	#getfilm { 
+		&:hover, &:focus {background: $film; 	color: #000; 
+			svg {fill: #000;}
+		}
+	}
+	#getshow { 
+		&:hover, &:focus {background: $tvshow; 	color: #000; 
+			svg {fill: #000;}
+		}
+	}
+	#getgame { 
+		&:hover, &:focus {background: $game; 	color: #000; 
+			svg {fill: #000;}
+		}
+	}
+	#getsong { 
+		&:hover, &:focus {background: $song; 	color: #000; 
+			svg {fill: #000;}
+		}
+	}
+	#getbook { 
+		&:hover, &:focus {background: $book; 	color: #000; 
+			svg {fill: #000;}
+		}
+	}
+	
+	
+	
+	
+	
+}
+
+
+#wrapper {height: calc(100vh - 60px); padding: 20px;
+display: flex;     align-items: center;
+    justify-items: center;
+    width: 100%;
+    perspective: 1000px; // For 3D flip effect
+}
+
+#result.active {
+	//border: 3px solid #fff;
+color: #fff;
+		#result-year{margin-top: 0;}
+}
+
+#result {
+	width: 320px;
+	height: 400px;
+	margin: 0 auto;
+	position: relative;
+
+	.card-inner {
+		width: 100%;
+		height: 100%;
+		position: relative;
+		transform-style: preserve-3d;
+		-webkit-transform-style: preserve-3d;
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		transition: transform 0.6s;
+	}
+
+	.card-front,
+	.card-back {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		border-radius: 20px;
+		padding: 30px;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+	}
+
+	.card-front {
+		background: #000;
+		color: #fff;
+		z-index: 2;
+
+		span {
+			display: inline-block;
+			align-self: flex-start;
+			color: #000;
+			padding: 0px 8px;
+			font-weight: 800;
+			text-transform: uppercase;
+			background: #FFF;
+		}
+		span.film {background: $film;}
+		span.tvshow {background: $tvshow;}
+		span.game {background: $game;}
+		span.song {background: $song;}
+		span.book {background: $book;}
+
+		#result-author {
+			border-top: 1px solid rgba(255,255,255,0.4);
+			padding-top: 10px;
+		}
+	}
+
+	.card-back {
+		background: #000;
+		color: #fff;
+		transform: rotateY(180deg);
+		z-index: 1;
+
+		.card-back-content {
+			text-align: center;
+			margin: auto;
+
+			h3 {
+				color: #fff;
+				margin-bottom: 20px;
+			}
+
+			ul {
+				text-align: left;
+				display: inline-block;
+				margin: 20px 0;
+
+				li {
+					margin: 10px 0;
+				}
+			}
+		}
+	}
+}
+
+a.social-link {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    svg {width: 24px;}
+}
+
+
+// Timer styles
+.timer-container {
+	position: fixed;
+	top: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 100;
+	text-align: center;
+}
+
+.timer-display-wrapper {
+	margin-bottom: 10px;
+}
+
+.timer-display {
+	font-size: 3rem;
+	font-weight: 800;
+	color: #fff;
+	text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+	min-width: 140px;
+	transition: all 0.3s ease;
+
+	&.timer-warning {
+		color: #F8B34C;
+		animation: pulse 1s infinite;
+	}
+
+	&.timer-complete {
+		color: #d44040;
+		animation: flash 0.5s 2;
+	}
+}
+
+.timer-controls {
+	display: flex;
+	gap: 5px;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.btn-timer {
+	background: rgba(255,255,255,0.1);
+	border: 1px solid rgba(255,255,255,0.2);
+	color: #fff;
+	padding: 5px 12px;
+	font-size: 0.85rem;
+
+	&:hover {
+		background: rgba(255,255,255,0.2);
+		color: #fff;
+	}
+
+	&.active {
+		background: rgba(255,255,255,0.3);
+		border-color: rgba(255,255,255,0.5);
+	}
+}
+
+.btn-timer-toggle {
+	background: #01C271;
+	border: none;
+	color: #fff;
+	padding: 5px 20px;
+	font-weight: 600;
+
+	&:hover {
+		background: darken(#01C271, 10%);
+		color: #fff;
+	}
+
+	&.active {
+		background: #d44040;
+
+		&:hover {
+			background: darken(#d44040, 10%);
+		}
+	}
+}
+
+@keyframes pulse {
+	0%, 100% { opacity: 1; transform: scale(1); }
+	50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes flash {
+	0%, 50%, 100% { opacity: 1; }
+	25%, 75% { opacity: 0.3; }
+}
+
+// Card animations and swipe gestures
+#result {
+	transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+	cursor: grab;
+	user-select: none;
+
+	&.dragging {
+		cursor: grabbing;
+		transition: none;
+	}
+
+	&.card-enter {
+		animation: cardEnter 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+}
+
+@keyframes cardEnter {
+	from {
+		opacity: 0;
+		transform: translateY(-50px) scale(0.8);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+
+@media (max-width: 576px) {
+
+#actions {
+	button {
+		span {display: none;}
+	}
+
+
+	}
+
+.timer-container {
+	top: 10px;
+}
+
+.timer-display {
+	font-size: 2rem;
+	min-width: 100px;
+}
+
+.btn-timer {
+	font-size: 0.75rem;
+	padding: 4px 8px;
+}
+
+.btn-timer-toggle {
+	padding: 4px 16px;
+}
+}
